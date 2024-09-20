@@ -1,0 +1,36 @@
+{% macro render_input(field, showErrors="true") %}
+    <tr>
+        <td>{{ field.label }}</td>
+        <td>{{ field(**kwargs)|safe }}
+            {% if showErrors=="true" and field.errors %}
+            <ul class="errors">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </td>
+    </tr>
+{% endmacro %}
+
+<form method="post">
+    <table>
+        {{render_input(form.uName)}}
+        {{render_input(form.uPass)}}
+        {{render_input(form.uPhone)}}
+        {{render_input(form.uEmail, type="email")}}
+        {{render_input(form.isGetEmails)}}
+        {{render_input(form.uDob, type="date")}}
+        {{render_input(form.uGender)}}
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+
+<style>
+    .errors{
+        font-size: 1em;
+        color: red;
+    }
+</style>
